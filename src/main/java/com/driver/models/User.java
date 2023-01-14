@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,8 +23,7 @@ public class User {
     private  String lastName;
 
    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "user")
-   @JsonIgnore
-   private Set<User> userSet = new HashSet<User>();
+    private List<Blog> blogs;
 
     public User() {
     }
