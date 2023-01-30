@@ -1,39 +1,26 @@
 package com.driver.models;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
+import java.util.*;
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id; // id auto generated ka matlab
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String username;
-
     private String password;
-
     private String firstName;
+    private String lastName;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Blog> blogList;
 
-    private  String lastName;
-
-   @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "user")
-    private List<Blog> blogs;
-
-    public User() {
+    public List<Blog> getBlogList() {
+        return blogList;
     }
 
-    public User(int id, String username, String password, String firstName, String lastName) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
     }
 
     public int getId() {
